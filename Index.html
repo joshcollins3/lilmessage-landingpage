@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lil Message — A Cult Classic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #080808;
+      --deep: #0d0d0d;
+      --card: #111111;
+      --border: #222222;
+      --gold: #c9a84c;
+      --gold-dim: #7a6228;
+      --fog: #2a2a2a;
+      --white: #f0ece4;
+      --muted: #888880;
+      --red: #8b1a1a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Crimson Pro', Georgia, serif;
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* GRAIN OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+      padding: 4rem 2rem;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 60% 40% at 50% 60%, rgba(139, 26, 26, 0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201, 168, 76, 0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(3rem, 10vw, 8rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      text-shadow: 
+        0 0 80px rgba(201, 168, 76, 0.15),
+        0 2px 4px rgba(0,0,0,0.8);
+      opacity: 0;
+      animation: fadeUp 1.2s ease 0.4s forwards;
+      position: relative;
+    }
+
+    .hero-title span {
+      display: block;
+      color: var(--gold);
+      font-size: 0.55em;
+      letter-spacing: 0.05em;
+      margin-top: 0.3em;
+    }
+
+    .hero-divider {
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--gold-dim), transparent);
+      margin: 2.5rem auto;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.8s forwards;
+    }
+
+    .hero-tagline {
+      font-family: 'Crimson Pro', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      max-width: 500px;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeUp 1s ease 1s forwards;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 1s ease 1.2s forwards;
+    }
+
+    .btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.9rem 2rem;
+      border: 1px solid;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      transform: translateX(-101%);
+      transition: transform 0.3s ease;
+    }
+
+    .btn:hover::before {
+      transform: translateX(0);
+    }
+
+    .btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--black);
+    }
+
+    .btn-primary::before {
+      background: var(--white);
+    }
+
+    .btn-primary:hover {
+      color: var(--black);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--muted);
+    }
+
+    .btn-ghost::before {
+      background: var(--card);
+    }
+
+    .btn-ghost:hover {
+      color: var(--white);
+      border-color: var(--fog);
+    }
+
+    /* SCROLL INDICATOR */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 2s forwards;
+    }
+
+    .scroll-hint span {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold-dim), transparent);
+      animation: scrollPulse 2s ease infinite;
+    }
+
+    /* EP SECTION */
+    .section {
+      padding: 6rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 3rem;
+      line-height: 1.2;
+    }
+
+    /* ALBUM ART FEATURE */
+    .ep-feature {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    @media (max-width: 700px) {
+      .ep-feature {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    .album-art-wrapper {
+      position: relative;
+    }
+
+    .album-art-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, var(--gold-dim), transparent 50%, var(--gold-dim));
+      z-index: -1;
+    }
+
+    .album-art-placeholder {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.5rem;
+      color: var(--gold-dim);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .album-art-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+
+    }
+
+    .ep-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .ep-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+    }
+
+    .ep-name {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+    }
+
+    .ep-description {
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.8;
+      border-left: 1px solid var(--gold-dim);
+      padding-left: 1.5rem;
+    }
+
+    /* TRACKLIST */
+    .tracklist {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .track {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: all 0.2s ease;
+    }
+
+    .track:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .track:hover {
+      padding-left: 0.5rem;
+    }
+
+    .track-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--gold-dim);
+      min-width: 1.5rem;
+    }
+
+    .track-name {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--white);
+      flex: 1;
+      letter-spacing: 0.02em;
+    }
+
+    .track-duration {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+
+    /* LINKS SECTION */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    .link-card {
+      background: var(--deep);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      text-decoration: none;
+      transition: background 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .link-card::after {
+      content: '→';
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      font-size: 1rem;
+      color: var(--gold-dim);
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .link-card:hover {
+      background: var(--card);
+    }
+
+    .link-card:hover::after {
+      transform: translate(3px, -3px);
+      color: var(--gold);
+    }
+
+    .link-card-icon {
+      font-size: 1.5rem;
+    }
+
+    .link-card-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+    }
+
+    .link-card-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1rem;
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    .link-card-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* MANIFESTO SECTION */
+    .manifesto {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .manifesto::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 50% 80% at 50% 50%, rgba(139, 26, 26, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .manifesto-quote {
+      font-family: 'Crimson Pro', serif;
+      font-style: italic;
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 300;
+      color: var(--white);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    .manifesto-quote::before {
+      content: '"';
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 5rem;
+      color: var(--gold-dim);
+      opacity: 0.3;
+      position: absolute;
+      top: -2rem;
+      left: -2rem;
+      line-height: 1;
+    }
+
+    .manifesto-attr {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+      margin-top: 2rem;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-name {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.9rem;
+      color: var(--gold-dim);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      color: var(--fog);
+      text-transform: uppercase;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* SEPARATOR */
+    .gold-rule {
+      width: 60px;
+      height: 1px;
+      background: var(--gold-dim);
+      margin: 0 auto 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Pioneer of Cult Rap</p>
+    <h1 class="hero-title">
+      Lil Message
+      <span>A Cult Classic</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">Four songs. One reckoning. Out now on all platforms.</p>
+    <div class="hero-cta-group">
+      <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf?si=5ok-uvUBSkWyirvdH-8H-g" class="btn btn-primary" target="_blank"><span>Stream Now</span></a>
+      <a href="https://www.youtube.com/@LilMessage" class="btn btn-ghost" target="_blank"><span>Watch on YouTube</span></a>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- EP FEATURE -->
+  <section class="section">
+    <div class="ep-feature">
+      <div class="album-art-wrapper">
+        <div class="album-art-placeholder">
+          <img src="assets/album-cover.jpg" alt="A Cult Classic - Lil Message" />
+          
+        </div>
+      </div>
+      <div class="ep-info">
+        <p class="ep-meta">Debut EP · 2026 · 4 Songs</p>
+        <h2 class="ep-name">A Cult Classic</h2>
+        <p class="ep-description">
+          A debut EP about growing up in a high-control religious movement — 
+          and finding peace on the other side.
+        </p>
+        <div class="tracklist">
+          <div class="track">
+            <span class="track-num">01</span>
+            <span class="track-name">Sunday School</span>
+            <span class="track-duration">2:58</span>
+          </div>
+          <div class="track">
+            <span class="track-num">02</span>
+            <span class="track-name">I Almost Remembered</span>
+            <span class="track-duration">3:32</span>
+          </div>
+          <div class="track">
+            <span class="track-num">03</span>
+            <span class="track-name">Home</span>
+            <span class="track-duration">2:31</span>
+          </div>
+          <div class="track">
+            <span class="track-num">04</span>
+            <span class="track-name">Resolve</span>
+            <span class="track-duration">3:12</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <div class="manifesto">
+    <p class="manifesto-quote">
+      You're welcome, you're loved, you're more than enough —
+      and the real you is here still inside.
+      Don't let any man, woman, or stranger change who you are in this life.
+    </p>
+    <p class="manifesto-attr">— Resolve, A Cult Classic</p>
+  </div>
+
+  <!-- LINKS -->
+  <section class="section">
+    <p class="section-label">Find Lil Message</p>
+    <h2 class="section-title">Listen. Watch. Wear.</h2>
+    <div class="links-grid">
+      <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf?si=5ok-uvUBSkWyirvdH-8H-g" class="link-card" target="_blank">
+        <span class="link-card-icon">🎵</span>
+        <span class="link-card-label">Stream</span>
+        <span class="link-card-title">Spotify</span>
+        <span class="link-card-desc">A Cult Classic — now on all platforms</span>
+      </a>
+      <a href="https://www.youtube.com/@LilMessage" class="link-card" target="_blank">
+        <span class="link-card-icon">▶</span>
+        <span class="link-card-label">Watch</span>
+        <span class="link-card-title">YouTube</span>
+        <span class="link-card-desc">Official lyric videos for all four songs</span>
+      </a>
+      <a href="https://direct.distrokid.com/lilmessage/home" class="link-card" target="_blank">
+        <span class="link-card-icon">👕</span>
+        <span class="link-card-label">Merch</span>
+        <span class="link-card-title">Store</span>
+        <span class="link-card-desc">Official Lil Message merchandise</span>
+      </a>
+      <!-- <a href="https://music.apple.com/us/artist/lil-message/1620432587" class="link-card" target="_blank">
+        <span class="link-card-icon">🎧</span>
+        <span class="link-card-label">Stream</span>
+        <span class="link-card-title">Apple Music</span>
+        <span class="link-card-desc">Available on Apple Music and iTunes</span>
+      </a> -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-name">Lil Message</p>
+    <p class="footer-copy">© 2026 · A Cult Classic · All Rights Reserved</p>
+  </footer>
+
+</body>
+</html>
