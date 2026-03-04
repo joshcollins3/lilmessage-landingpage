@@ -73,14 +73,16 @@
 }
 .hero-title {
   font-family: 'Cinzel Decorative', serif;
-  font-size: clamp(3rem, 10vw, 8rem);
+  font-size: clamp(2rem, 9vw, 8rem);
   font-weight: 900;
-  line-height: 0.9;
+  line-height: 1;
   letter-spacing: -0.02em;
   color: var(--white);
   text-shadow: 0 0 80px rgba(201,168,76,0.15), 0 2px 4px rgba(0,0,0,0.8);
   opacity: 0;
   animation: fadeUp 1.2s ease 0.4s forwards;
+  word-break: break-word;
+  padding: 0 0.5rem;
 }
 .hero-title span {
   display: block;
@@ -108,6 +110,7 @@
   line-height: 1.6;
   opacity: 0;
   animation: fadeUp 1s ease 1s forwards;
+  padding: 0 1rem;
 }
 .hero-cta-group {
   display: flex;
@@ -117,6 +120,7 @@
   justify-content: center;
   opacity: 0;
   animation: fadeUp 1s ease 1.2s forwards;
+  padding: 0 1rem;
 }
 .btn {
   font-family: 'Space Mono', monospace;
@@ -194,11 +198,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 5rem;
-  align-items: center;
+  align-items: start;
   position: relative;
-}
-@media (max-width: 700px) {
-  .deliverance-inner { grid-template-columns: 1fr; gap: 2.5rem; }
 }
 .deliverance-art-wrapper { position: relative; }
 .deliverance-art-wrapper::before {
@@ -211,16 +212,19 @@
 }
 .deliverance-art-placeholder {
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 1 / 1;
   background: var(--card);
   border: 1px solid var(--border);
   overflow: hidden;
+  display: block;
+  line-height: 0;
 }
 .deliverance-art-placeholder img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  vertical-align: bottom;
 }
 .deliverance-info { display: flex; flex-direction: column; gap: 1.5rem; }
 .deliverance-badge {
@@ -267,7 +271,6 @@
 .track:hover { padding-left: 0.5rem; }
 .track-num { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: var(--gold-dim); min-width: 1.5rem; }
 .track-name { font-size: 0.95rem; color: var(--white); flex: 1; letter-spacing: 0.02em; }
-.track-duration { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: var(--muted); }
 .deliverance-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
 
 /* MANIFESTO */
@@ -335,8 +338,7 @@
   margin-bottom: 3rem;
   line-height: 1.2;
 }
-.ep-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-@media (max-width: 700px) { .ep-feature { grid-template-columns: 1fr; gap: 2rem; } }
+.ep-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
 .album-art-wrapper { position: relative; }
 .album-art-wrapper::before {
   content: '';
@@ -347,12 +349,14 @@
 }
 .album-art-placeholder {
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 1 / 1;
   background: var(--card);
   border: 1px solid var(--border);
   overflow: hidden;
+  display: block;
+  line-height: 0;
 }
-.album-art-placeholder img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.album-art-placeholder img { width: 100%; height: 100%; object-fit: cover; display: block; vertical-align: bottom; }
 .ep-info { display: flex; flex-direction: column; gap: 1.5rem; }
 .ep-meta { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold-dim); text-transform: uppercase; }
 .ep-name { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 700; color: var(--white); line-height: 1.1; }
@@ -399,6 +403,13 @@ footer { padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--bor
 .footer-name { font-family: 'Cinzel Decorative', serif; font-size: 0.9rem; color: var(--gold-dim); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
 .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.15em; color: var(--fog); text-transform: uppercase; }
 
+/* MOBILE */
+@media (max-width: 700px) {
+  .hero { padding: 4rem 1.5rem; }
+  .deliverance-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .ep-feature { grid-template-columns: 1fr; gap: 2rem; }
+}
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -409,30 +420,6 @@ footer { padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--bor
   50% { opacity: 1; transform: scaleY(1.2); }
 }
 ```
-
-    /* Mobile hero fix */
-@media (max-width: 480px) {
-  .hero {
-    padding: 4rem 1.25rem;
-  }
-  .hero-title {
-    font-size: clamp(2.2rem, 14vw, 4rem);
-    word-break: break-word;
-  }
-}
-
-/* Mobile image fix */
-@media (max-width: 700px) {
-  .deliverance-art-placeholder {
-    max-height: 80vw;
-  }
-  .deliverance-art-placeholder img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-}
-
 
   </style>
 </head>
@@ -460,7 +447,7 @@ footer { padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--bor
     <div class="deliverance-inner">
       <div class="deliverance-art-wrapper">
         <div class="deliverance-art-placeholder">
-          <img src="assets/Deliverance.png" alt="Deliverance - Lil Message" />
+          <img src="assets/deliverance-cover.jpg" alt="Deliverance - Lil Message" />
         </div>
       </div>
       <div class="deliverance-info">
