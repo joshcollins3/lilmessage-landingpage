@@ -410,6 +410,30 @@ footer { padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--bor
 }
 ```
 
+    /* Mobile hero fix */
+@media (max-width: 480px) {
+  .hero {
+    padding: 4rem 1.25rem;
+  }
+  .hero-title {
+    font-size: clamp(2.2rem, 14vw, 4rem);
+    word-break: break-word;
+  }
+}
+
+/* Mobile image fix */
+@media (max-width: 700px) {
+  .deliverance-art-placeholder {
+    max-height: 80vw;
+  }
+  .deliverance-art-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+
   </style>
 </head>
 <body>
