@@ -3,8 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lil Message — Reconstruction</title>
+  <title>Lil Message — Clearer Lens</title>
+  <meta name="description" content="Clearer Lens — the eighth album from Lil Message, Pioneer of Cult Rap. Seven songs about splitting in half and learning to see straight." />
   <link rel="icon" type="image/png" href="assets/favicon.ico" />
+
+  <!-- Open Graph / social share -->
+  <meta property="og:type" content="music.album" />
+  <meta property="og:title" content="Clearer Lens — Lil Message" />
+  <meta property="og:description" content="The eighth album. Seven songs about splitting in half and learning to see straight." />
+  <meta property="og:image" content="https://lilmessage.org/assets/clearer-lens.jpg" />
+  <meta property="og:url" content="https://lilmessage.org/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -147,6 +157,8 @@
     .btn-ghost { background: transparent; border-color: var(--border); color: var(--muted); }
     .btn-ghost::before { background: var(--card); }
     .btn-ghost:hover { color: var(--white); border-color: var(--fog); }
+    .btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .link-card:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
 
     .scroll-hint {
       position: absolute;
@@ -413,6 +425,16 @@
       0%, 100% { opacity: 0.3; transform: scaleY(1); }
       50% { opacity: 1; transform: scaleY(1.2); }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .hero-eyebrow, .hero-title, .hero-divider, .hero-tagline, .hero-cta-group, .scroll-hint { opacity: 1 !important; }
+    }
   </style>
 </head>
 <body>
@@ -421,13 +443,13 @@
     <p class="hero-eyebrow">Pioneer of Cult Rap</p>
     <h1 class="hero-title">
       Lil Message
-      <span>Reconstruction</span>
+      <span>Clearer Lens</span>
     </h1>
     <div class="hero-divider"></div>
     <p class="hero-tagline">The work of becoming someone the system didn't design.</p>
     <div class="hero-cta-group">
-      <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf" class="btn btn-primary" target="_blank"><span>Stream Now</span></a>
-      <a href="https://www.youtube.com/@LilMessage" class="btn btn-ghost" target="_blank"><span>Watch on YouTube</span></a>
+      <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf" class="btn btn-primary" target="_blank" rel="noopener"><span>Stream Now</span></a>
+      <a href="https://www.youtube.com/@LilMessage" class="btn btn-ghost" target="_blank" rel="noopener"><span>Watch on YouTube</span></a>
     </div>
     <div class="scroll-hint">
       <span>Scroll</span>
@@ -435,18 +457,62 @@
     </div>
   </section>
 
-  <!-- RECONSTRUCTION — Featured -->
+  <!-- CLEARER LENS — Featured -->
   <div class="deliverance-feature">
     <div class="deliverance-inner">
       <div class="deliverance-art-wrapper">
         <div class="deliverance-art-placeholder">
-          <img src="assets/reconstruction.jpg" alt="Reconstruction - Lil Message" />
+          <img src="assets/clearer-lens.jpg" alt="Clearer Lens - Lil Message" />
         </div>
       </div>
       <div class="deliverance-info">
-        <span class="deliverance-badge">★ New Album · June 15, 2026</span>
-        <h2 class="deliverance-title">Reconstruction</h2>
+        <span class="deliverance-badge">★ New Album · August 2026</span>
+        <h2 class="deliverance-title">Clearer Lens</h2>
         <p class="deliverance-description">
+          Seven songs about splitting in half and finding the way back to one piece —
+          from a fever that wouldn't break to an offer of energy with conditions attached.
+          The looking is the work. What you see at the end of it is yours.
+        </p>
+        <div class="tracklist">
+          <div class="track"><span class="track-num">01</span><span class="track-name">Divergent</span></div>
+          <div class="track"><span class="track-num">02</span><span class="track-name">Hazmat</span></div>
+          <div class="track"><span class="track-num">03</span><span class="track-name">Anywhere But Here</span></div>
+          <div class="track"><span class="track-num">04</span><span class="track-name">85 Degree Melting Hospital Bed</span></div>
+          <div class="track"><span class="track-num">05</span><span class="track-name">Even If You Press Play</span></div>
+          <div class="track"><span class="track-num">06</span><span class="track-name">I Wanna Know What Happens</span></div>
+          <div class="track"><span class="track-num">07</span><span class="track-name">Energy</span></div>
+        </div>
+        <div class="deliverance-cta">
+          <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf" class="btn btn-primary" target="_blank" rel="noopener"><span>Spotify</span></a>
+          <a href="https://music.apple.com/us/artist/lil-message/1880194721" class="btn btn-ghost" target="_blank" rel="noopener"><span>Apple Music</span></a>
+          <a href="https://www.youtube.com/@LilMessage" class="btn btn-ghost" target="_blank" rel="noopener"><span>YouTube</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="manifesto">
+    <p class="manifesto-quote">
+      That if you calm me down, the way that I look —
+      it will be through a clearer lens.
+    </p>
+    <p class="manifesto-attr">— Energy · Lil Message</p>
+  </div>
+
+  <!-- RECONSTRUCTION -->
+  <section class="section">
+    <p class="section-label">Previous Chapter</p>
+    <h2 class="section-title">Reconstruction</h2>
+    <div class="ep-feature">
+      <div class="album-art-wrapper">
+        <div class="album-art-placeholder">
+          <img src="assets/reconstruction.jpg" alt="Reconstruction - Lil Message" />
+        </div>
+      </div>
+      <div class="ep-info">
+        <p class="ep-meta">Album · June 2026 · 7 Songs</p>
+        <h2 class="ep-name">Reconstruction</h2>
+        <p class="ep-description">
           Seven tracks on the slow work of rebuilding a self after it was taken apart —
           re-establishing the wiring of who you are. The self they take is yours to take back.
           The voice that emanates is yours.
@@ -461,21 +527,12 @@
           <div class="track"><span class="track-num">07</span><span class="track-name">Meta</span></div>
         </div>
         <div class="deliverance-cta">
-          <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf" class="btn btn-primary" target="_blank"><span>Spotify</span></a>
-          <a href="https://music.apple.com/us/artist/lil-message/1880194721" class="btn btn-ghost" target="_blank"><span>Apple Music</span></a>
-          <a href="https://www.youtube.com/@LilMessage" class="btn btn-ghost" target="_blank"><span>YouTube</span></a>
+          <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf" class="btn btn-ghost" target="_blank" rel="noopener"><span>Spotify</span></a>
+          <a href="https://music.apple.com/us/artist/lil-message/1880194721" class="btn btn-ghost" target="_blank" rel="noopener"><span>Apple Music</span></a>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="manifesto">
-    <p class="manifesto-quote">
-      Every minute I take back, I regain the part that makes me me.
-      The voice that emanates is mine.
-    </p>
-    <p class="manifesto-attr">— we made it this far · Lil Message</p>
-  </div>
+  </section>
 
   <!-- CULTIVATION OF SELF -->
   <section class="section">
@@ -505,8 +562,8 @@
           <div class="track"><span class="track-num">07</span><span class="track-name">A reason</span></div>
         </div>
         <div class="deliverance-cta">
-          <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf" class="btn btn-ghost" target="_blank"><span>Spotify</span></a>
-          <a href="https://music.apple.com/us/artist/lil-message/1880194721" class="btn btn-ghost" target="_blank"><span>Apple Music</span></a>
+          <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf" class="btn btn-ghost" target="_blank" rel="noopener"><span>Spotify</span></a>
+          <a href="https://music.apple.com/us/artist/lil-message/1880194721" class="btn btn-ghost" target="_blank" rel="noopener"><span>Apple Music</span></a>
         </div>
       </div>
     </div>
@@ -539,8 +596,8 @@
           <div class="track"><span class="track-num">07</span><span class="track-name">Liberate your Consciousness</span></div>
         </div>
         <div class="deliverance-cta">
-          <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf" class="btn btn-ghost" target="_blank"><span>Spotify</span></a>
-          <a href="https://music.apple.com/us/artist/lil-message/1880194721" class="btn btn-ghost" target="_blank"><span>Apple Music</span></a>
+          <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf" class="btn btn-ghost" target="_blank" rel="noopener"><span>Spotify</span></a>
+          <a href="https://music.apple.com/us/artist/lil-message/1880194721" class="btn btn-ghost" target="_blank" rel="noopener"><span>Apple Music</span></a>
         </div>
       </div>
     </div>
@@ -574,8 +631,8 @@
           <div class="track"><span class="track-num">07</span><span class="track-name">Breathe</span></div>
         </div>
         <div class="deliverance-cta">
-          <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf" class="btn btn-ghost" target="_blank"><span>Spotify</span></a>
-          <a href="https://music.apple.com/us/artist/lil-message/1880194721" class="btn btn-ghost" target="_blank"><span>Apple Music</span></a>
+          <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf" class="btn btn-ghost" target="_blank" rel="noopener"><span>Spotify</span></a>
+          <a href="https://music.apple.com/us/artist/lil-message/1880194721" class="btn btn-ghost" target="_blank" rel="noopener"><span>Apple Music</span></a>
         </div>
       </div>
     </div>
@@ -608,8 +665,8 @@
           <div class="track"><span class="track-num">07</span><span class="track-name">The Digital Panopticon</span></div>
         </div>
         <div class="deliverance-cta">
-          <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf" class="btn btn-ghost" target="_blank"><span>Spotify</span></a>
-          <a href="https://music.apple.com/us/artist/lil-message/1880194721" class="btn btn-ghost" target="_blank"><span>Apple Music</span></a>
+          <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf" class="btn btn-ghost" target="_blank" rel="noopener"><span>Spotify</span></a>
+          <a href="https://music.apple.com/us/artist/lil-message/1880194721" class="btn btn-ghost" target="_blank" rel="noopener"><span>Apple Music</span></a>
         </div>
       </div>
     </div>
@@ -643,8 +700,8 @@
           <div class="track"><span class="track-num">07</span><span class="track-name">The Message of the Real You</span></div>
         </div>
         <div class="deliverance-cta">
-          <a href="https://open.spotify.com/album/4j9xF2oR6MuGJ6pZR1MkXN?si=UhHzWT04S-adfbNsnhevJQ" class="btn btn-ghost" target="_blank"><span>Spotify</span></a>
-          <a href="https://music.apple.com/us/album/the-message-of-the-real-you/1885182852" class="btn btn-ghost" target="_blank"><span>Apple Music</span></a>
+          <a href="https://open.spotify.com/album/4j9xF2oR6MuGJ6pZR1MkXN?si=UhHzWT04S-adfbNsnhevJQ" class="btn btn-ghost" target="_blank" rel="noopener"><span>Spotify</span></a>
+          <a href="https://music.apple.com/us/album/the-message-of-the-real-you/1885182852" class="btn btn-ghost" target="_blank" rel="noopener"><span>Apple Music</span></a>
         </div>
       </div>
     </div>
@@ -677,8 +734,8 @@
           <div class="track"><span class="track-num">07</span><span class="track-name">Deliverance</span></div>
         </div>
         <div class="deliverance-cta">
-          <a href="https://open.spotify.com/album/6FAvnIfC67d1l34PkeI3hE?si=S5lKWi1aTwWBvKwGQle47Q" class="btn btn-ghost" target="_blank"><span>Spotify</span></a>
-          <a href="https://music.apple.com/us/album/deliverance/1882474039" class="btn btn-ghost" target="_blank"><span>Apple Music</span></a>
+          <a href="https://open.spotify.com/album/6FAvnIfC67d1l34PkeI3hE?si=S5lKWi1aTwWBvKwGQle47Q" class="btn btn-ghost" target="_blank" rel="noopener"><span>Spotify</span></a>
+          <a href="https://music.apple.com/us/album/deliverance/1882474039" class="btn btn-ghost" target="_blank" rel="noopener"><span>Apple Music</span></a>
         </div>
       </div>
     </div>
@@ -708,8 +765,8 @@
           <div class="track"><span class="track-num">04</span><span class="track-name">Resolve</span></div>
         </div>
         <div class="deliverance-cta">
-          <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf?si=5ok-uvUBSkWyirvdH-8H-g" class="btn btn-ghost" target="_blank"><span>Spotify</span></a>
-          <a href="https://music.apple.com/us/album/a-cult-classic-ep/1881202824" class="btn btn-ghost" target="_blank"><span>Apple Music</span></a>
+          <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf?si=5ok-uvUBSkWyirvdH-8H-g" class="btn btn-ghost" target="_blank" rel="noopener"><span>Spotify</span></a>
+          <a href="https://music.apple.com/us/album/a-cult-classic-ep/1881202824" class="btn btn-ghost" target="_blank" rel="noopener"><span>Apple Music</span></a>
         </div>
       </div>
     </div>
@@ -720,26 +777,26 @@
     <p class="section-label">Find Lil Message</p>
     <h2 class="section-title">Listen. Watch. Wear.</h2>
     <div class="links-grid">
-      <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf" class="link-card" target="_blank">
-        <span class="link-card-icon">🎵</span>
+      <a href="https://open.spotify.com/artist/6BYedYVpsb71gVgALW9nzf" class="link-card" target="_blank" rel="noopener">
+        <span class="link-card-icon" aria-hidden="true">🎵</span>
         <span class="link-card-label">New Album</span>
         <span class="link-card-title">Spotify</span>
-        <span class="link-card-desc">Stream Reconstruction</span>
+        <span class="link-card-desc">Stream Clearer Lens</span>
       </a>
-      <a href="https://www.youtube.com/@LilMessage" class="link-card" target="_blank">
-        <span class="link-card-icon">▶</span>
+      <a href="https://www.youtube.com/@LilMessage" class="link-card" target="_blank" rel="noopener">
+        <span class="link-card-icon" aria-hidden="true">▶</span>
         <span class="link-card-label">Watch</span>
         <span class="link-card-title">YouTube</span>
         <span class="link-card-desc">Official lyric videos and album visuals</span>
       </a>
-      <a href="https://music.apple.com/us/artist/lil-message/1880194721" class="link-card" target="_blank">
-        <span class="link-card-icon">🎧</span>
+      <a href="https://music.apple.com/us/artist/lil-message/1880194721" class="link-card" target="_blank" rel="noopener">
+        <span class="link-card-icon" aria-hidden="true">🎧</span>
         <span class="link-card-label">New Album</span>
         <span class="link-card-title">Apple Music</span>
         <span class="link-card-desc">Listen in lossless audio</span>
       </a>
-      <a href="https://direct.distrokid.com/lilmessage/home" class="link-card" target="_blank">
-        <span class="link-card-icon">👕</span>
+      <a href="https://direct.distrokid.com/lilmessage/home" class="link-card" target="_blank" rel="noopener">
+        <span class="link-card-icon" aria-hidden="true">👕</span>
         <span class="link-card-label">Merch</span>
         <span class="link-card-title">Store</span>
         <span class="link-card-desc">Official Lil Message merchandise</span>
