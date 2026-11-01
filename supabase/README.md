@@ -27,7 +27,16 @@ Supabase's built-in email is only for trying things out and sends very few messa
 
 1. Sign up with an email service such as Resend or Postmark, and verify `lilmessage.org` with it.
 2. Enter its SMTP details under **Authentication → SMTP Settings**.
-3. Optional: reword the email under **Authentication → Email Templates → Magic Link**.
+3. Put the sign-in code in the emails. Under **Authentication → Email Templates**, replace the body of both **Confirm signup** (first-time sign-ins) and **Magic Link** (returning members) with:
+
+   ```html
+   <h2>Your Written Messages sign-in code</h2>
+   <p style="font-size: 28px; letter-spacing: 4px;"><strong>{{ .Token }}</strong></p>
+   <p>Enter this code on the forum. If you didn't ask for it, you can ignore this email.</p>
+   <p>On a computer or in your phone's browser, you can <a href="{{ .ConfirmationURL }}">sign in with this link</a> instead.</p>
+   ```
+
+   The code is what makes sign-in work inside the installed app, because a link would open the browser and sign in there instead.
 
 ## 5. Make yourself the admin
 
@@ -47,6 +56,7 @@ update public.profiles set username = 'LilMessage' where username = 'your_userna
 
 ## Good to know
 
+- **Installing the app:** the forum's footer shows **Install app** on iPhones and on browsers that support installing, such as Chrome on Android. The app needs a connection, because it loads the live forum instead of storing a copy.
 - **Paused projects:** free Supabase projects pause after a period of inactivity. Check the current plan terms before you announce the forum.
 - **Custom API domain:** the page only talks to `*.supabase.co`. If you ever give Supabase a custom domain, add it to `connect-src` in `forum/index.html`.
 - **Changing the boards:** edit the `boards` table in the Supabase dashboard. Covers come from `forum/covers/`, so add a new album's image there and put its filename in the `cover` column.

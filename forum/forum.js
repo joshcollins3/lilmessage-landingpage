@@ -167,7 +167,7 @@
 
   function signInDialog() {
     const email = h('input', { type: 'email', required: true, autocomplete: 'email', placeholder: 'you@example.com' });
-    const send = h('button.btn.btn-primary', { type: 'submit' }, h('span', null, 'Send sign-in link'));
+    const send = h('button.btn.btn-primary', { type: 'submit' }, h('span', null, 'Email me a code'));
     const form = h('form', {
       async onsubmit(event) {
         event.preventDefault();
@@ -181,12 +181,7 @@
             toast(error.status === 429 ? 'Too many emails sent. Wait a little and try again.' : "We couldn't send that email. Check the address and try again.", true);
             return;
           }
-          dialog.replaceChildren(
-            h('div.sent-sigil', null, sigil(email.value, 48)),
-            h('h2', null, 'Check your email'),
-            h('p', null, `We sent a sign-in link to ${email.value.trim()}. Open it on this device. Check your spam folder if it doesn't show up in a minute.`),
-            h('div.dialog-actions', null, button('btn-ghost', 'Close', () => dialog.close())),
-          );
+          codeStep(dialog, email.value.trim());
         });
       },
     },
@@ -195,10 +190,93 @@
     );
     const dialog = openDialog(
       h('h2', null, 'Sign in'),
-      h('p', null, "No password. We'll email you a link, and your email is never shown to anyone here."),
+      h('p', null, "No password. We'll email you a sign-in code, and your email is never shown to anyone here."),
       form,
     );
     email.focus();
+  }
+
+  // A code works inside the installed app, where an emailed link would open the
+  // browser and sign in there instead.
+  function codeStep(dialog, address) {
+    const code = h('input.code-input', {
+      type: 'text', inputMode: 'numeric', autocomplete: 'one-time-code', required: true,
+      maxLength: 10, pattern: '[0-9 ]+', title: 'The numbers from the email', spellcheck: false,
+    });
+    const problem = h('p.field-error', { role: 'alert' });
+    const verify = h('button.btn.btn-primary', { type: 'submit' }, h('span', null, 'Sign in'));
+    dialog.replaceChildren(
+      h('div.sent-sigil', null, sigil(address, 48)),
+      h('h2', null, 'Check your email'),
+      h('p', null, `We sent a message to ${address}. Enter the code from it here, or open its link in this browser. Check your spam folder if it doesn't show up in a minute.`),
+      h('form', {
+        async onsubmit(event) {
+          event.preventDefault();
+          problem.textContent = '';
+          await busy(verify, async () => {
+            const { error } = await db.auth.verifyOtp({ email: address, token: code.value.replace(/\s/g, ''), type: 'email' });
+            if (error) {
+              problem.textContent = error.status === 429
+                ? 'Too many tries. Wait a little and try again.'
+                : "That code didn't work. It may be mistyped or expired, so check it or request a new one.";
+              code.select();
+              return;
+            }
+            dialog.close();
+          });
+        },
+      },
+        h('label.field', null, h('span', null, 'Code'), code),
+        problem,
+        h('div.dialog-actions', null, button('btn-ghost', 'Close', () => dialog.close()), verify),
+      ),
+    );
+    code.focus();
+  }
+
+  // Installing to a home screen. Android browsers offer a prompt we can trigger;
+  // on iPhone it can only be done by hand from the Share menu.
+  let installPrompt = null;
+  const installed = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  const onIOS = () => /iPhone|iPad|iPod/.test(navigator.userAgent)
+    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+  window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    installPrompt = event;
+    renderFooterLinks();
+  });
+  window.addEventListener('appinstalled', () => {
+    installPrompt = null;
+    renderFooterLinks();
+  });
+
+  async function installApp() {
+    if (installPrompt) {
+      const prompt = installPrompt;
+      installPrompt = null;
+      await prompt.prompt();
+      renderFooterLinks();
+      return;
+    }
+    const dialog = openDialog(
+      h('h2', null, 'Install the app'),
+      h('ol.steps', null,
+        h('li', null, 'Tap the Share button in your browser.'),
+        h('li', null, 'Scroll down and tap Add to Home Screen.'),
+        h('li', null, 'Tap Add.'),
+      ),
+      h('p', null, "You'll sign in again inside the app, using the code from your email."),
+      h('div.dialog-actions', null, button('btn-primary', 'Got it', () => dialog.close())),
+    );
+  }
+
+  function renderFooterLinks() {
+    const canInstall = !installed() && (installPrompt || onIOS());
+    document.getElementById('footer-links').replaceChildren(
+      link('a.quiet', '?view=rules', 'Rules'),
+      ...(canInstall ? [quiet('Install app', installApp)] : []),
+    );
   }
 
   function usernameDialog() {
@@ -381,6 +459,7 @@
   }
 
   function renderBar() {
+    renderFooterLinks();
     const view = new URLSearchParams(location.search).get('view');
     const links = [link('a.bar-link.bar-rules', '?view=rules', 'Rules')];
     if (view === 'rules') links[0].setAttribute('aria-current', 'page');

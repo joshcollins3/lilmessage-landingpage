@@ -11,6 +11,15 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://*.supabase.co wss://*.supabase.co http://127.0.0.1:54321 ws://127.0.0.1:54321; base-uri 'none'; form-action 'self'; object-src 'none'" />
   <link rel="icon" type="image/png" href="../assets/favicon.ico" />
 
+  <!-- Installing to a home screen -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#080808" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="Written Msgs" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -270,6 +279,12 @@
     .name-preview { display: flex; align-items: center; gap: 1rem; margin-top: 1.25rem; min-height: 56px; padding: 0.5rem 0; }
     .name-preview b { font-family: var(--mono); font-weight: 400; font-size: 0.85rem; overflow-wrap: anywhere; }
     .sent-sigil { color: var(--gold); margin-bottom: 1.25rem; }
+    .field input.code-input { font-family: var(--mono); font-size: 1.4rem; letter-spacing: 0.3em; text-align: center; }
+    .field-error { color: var(--red-text); font-size: 1rem; margin-top: 0.75rem; }
+    .field-error:empty { display: none; }
+    dialog .steps { margin: 0.75rem 0 1rem 1.25rem; color: var(--white); font-size: 1.1rem; line-height: 1.5; font-weight: 300; }
+    dialog .steps li { padding: 0.25rem 0; }
+    dialog .steps li::marker { font-family: var(--mono); font-size: 0.75rem; color: var(--gold-text); }
 
     /* Toast */
     .toast {
@@ -309,6 +324,7 @@
     footer { margin-top: clamp(4rem, 10vw, 7rem); padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--border); view-transition-name: foot; }
     .footer-name { font-family: var(--display); font-size: 0.9rem; color: var(--gold-dim); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
     .footer-copy { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.15em; color: #5a5a55; text-transform: uppercase; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; }
 
     @media (max-width: 600px) {
       .bar { gap: 0.75rem; }
@@ -352,6 +368,7 @@
   <div id="banner"></div>
   <main id="main"></main>
   <footer>
+    <nav class="footer-links" id="footer-links" aria-label="Forum"></nav>
     <p class="footer-name">Lil Message</p>
     <p class="footer-copy">© 2026 · Lil Message Studios · All Rights Reserved</p>
   </footer>
