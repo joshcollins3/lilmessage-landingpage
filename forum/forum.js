@@ -214,7 +214,7 @@
       preview.replaceChildren(...(name ? [sigil(name, 52), h('b', null, name)] : []));
     };
     const agree = h('input', { type: 'checkbox', required: true });
-    const save = h('button.btn.btn-primary', { type: 'submit' }, h('span', null, 'Join Tabernacle'));
+    const save = h('button.btn.btn-primary', { type: 'submit' }, h('span', null, 'Join Written Messages'));
     const dialog = openDialog(
       h('h2', null, 'Choose your name'),
       h('p', null, "It's public and it can't be changed, so don't use your real name unless you want to. The mark beside it is drawn from the name itself."),
@@ -354,7 +354,7 @@
     try {
       content = await build;
     } catch {
-      content = message('Tabernacle didn\'t load.', 'Check your connection and try again.', button('btn-ghost', 'Try again', () => render()));
+      content = message('Written Messages didn\'t load.', 'Check your connection and try again.', button('btn-ghost', 'Try again', () => render()));
     }
     clearTimeout(started);
     if (token !== renderToken) return;
@@ -372,7 +372,7 @@
   }
 
   function setTitle(title) {
-    document.title = title ? `${title} — Tabernacle` : 'Tabernacle — Lil Message';
+    document.title = title ? `${title} — Written Messages` : 'Written Messages — Lil Message';
   }
 
   function message(title, body, ...actions) {
@@ -390,12 +390,11 @@
     else if (db) links.push(h('button.bar-link', { type: 'button', onclick: signInDialog }, 'Sign in'));
     bar.replaceChildren(
       h('a.bar-home', { href: '../' }, 'Lil Message'),
-      link('a.bar-link', hrefFor.home(), 'Tabernacle'),
+      link('a.bar-link', hrefFor.home(), 'Written Messages'),
       h('div.bar-links', null, links),
     );
-    bar.children[1].style.marginLeft = '-0.5rem';
     banner.replaceChildren(...(me && me.banned_at
-      ? [h('p.banner', null, "This account has been banned. You can read Tabernacle and delete what you've posted, but not post.")]
+      ? [h('p.banner', null, "This account has been banned. You can read the forum and delete what you've posted, but not post.")]
       : []));
   }
 
@@ -426,7 +425,7 @@
     return h('div.enter', null,
       h('section.masthead', null,
         h('a.eyebrow', { href: '../' }, 'Lil Message'),
-        h('h1', { tabIndex: -1 }, 'Tabernacle'),
+        h('h1', { tabIndex: -1 }, 'Written Messages'),
         h('div.masthead-rule'),
         h('p', null, 'The work of becoming someone the system didn\'t design. Talk about the records, and everything around them.'),
       ),
@@ -459,7 +458,7 @@
     return data;
   }
 
-  const notFound = () => message('Nothing here.', "That page doesn't exist, or it's been removed.", link('a.btn.btn-ghost', hrefFor.home(), h('span', null, 'Back to Tabernacle')));
+  const notFound = () => message('Nothing here.', "That page doesn't exist, or it's been removed.", link('a.btn.btn-ghost', hrefFor.home(), h('span', null, 'Back to Written Messages')));
 
   async function boardView(slug) {
     const board = await loadBoard(slug);
@@ -492,7 +491,7 @@
         h('div.wrap.board-inner', null,
           board.cover && h('img.board-art', { src: `covers/${board.cover}`, alt: `${board.name} album cover` }),
           h('div.board-info', null,
-            link('a.eyebrow', hrefFor.home(), '← Tabernacle'),
+            link('a.eyebrow', hrefFor.home(), '← Written Messages'),
             h('h1', { tabIndex: -1 }, board.name),
             h('p', null, board.description),
           ),
@@ -687,9 +686,9 @@
   function rulesView() {
     setTitle('Rules');
     return h('div.read.enter', null,
-      h('div.page-head', null, h('a.eyebrow', { href: './' }, 'Tabernacle'), h('h1', { tabIndex: -1 }, 'Rules & privacy')),
+      h('div.page-head', null, h('a.eyebrow', { href: './' }, 'Written Messages'), h('h1', { tabIndex: -1 }, 'Rules & privacy')),
       h('div.prose', null,
-        h('p.notice', null, "People here may be working through hard things. If you're in crisis, Tabernacle isn't watched around the clock, so please reach out to someone who can answer right away. In the US, call or text 988. Elsewhere, findahelpline.com lists services by country."),
+        h('p.notice', null, "People here may be working through hard things. If you're in crisis, this forum isn't watched around the clock, so please reach out to someone who can answer right away. In the US, call or text 988. Elsewhere, findahelpline.com lists services by country."),
         h('h2', null, 'The rules'),
         h('ul', null,
           h('li', null, 'Be decent to each other. No harassment, threats or hate.'),
@@ -704,8 +703,8 @@
         h('ul', null,
           h('li', null, 'Everything you post is public, and anyone can read it without an account. Think before you share details that could identify you.'),
           h('li', null, "Your email is used only for signing in. It's never shown to anyone here."),
-          h('li', null, 'We ask search engines not to list Tabernacle, but we can\'t promise that nothing is ever copied elsewhere.'),
-          h('li', null, 'Tabernacle stores your username, email, posts and when you joined. It runs on Supabase. There are no ads or tracking.'),
+          h('li', null, 'We ask search engines not to list this forum, but we can\'t promise that nothing is ever copied elsewhere.'),
+          h('li', null, 'This forum stores your username, email, posts and when you joined. It runs on Supabase. There are no ads or tracking.'),
           h('li', null, 'You can delete any of your posts, or your whole account, whenever you want. Deleted means deleted.'),
         ),
         config.contactEmail && h('p', { style: 'margin-top:1rem' }, 'Questions or removal requests: ', h('a', { href: `mailto:${config.contactEmail}` }, config.contactEmail), '.'),
@@ -742,7 +741,7 @@
     });
     return h('div.read.enter', null,
       h('div.page-head', null,
-        h('a.eyebrow', { href: './' }, 'Tabernacle'),
+        h('a.eyebrow', { href: './' }, 'Written Messages'),
         h('div.identity', { style: 'margin-top:1.25rem' },
           me && sigil(me.username, 72),
           h('h1', { tabIndex: -1, style: 'margin-top:0' }, me ? me.username : 'Your account'),
@@ -782,7 +781,7 @@
       const purge = h('input', { type: 'checkbox', checked: true });
       const yes = await confirmDialog({
         title: `Ban ${report.author}?`,
-        body: "They'll still be able to read Tabernacle, but not post.",
+        body: "They'll still be able to read the forum, but not post.",
         action: 'Ban',
         danger: true,
         extra: h('label.check', null, purge, h('span', null, 'Also delete everything they\'ve posted')),
@@ -791,7 +790,7 @@
     };
 
     return h('div.read.enter', null,
-      h('div.page-head', null, h('a.eyebrow', { href: './' }, 'Tabernacle'), h('h1', { tabIndex: -1 }, 'Moderate')),
+      h('div.page-head', null, h('a.eyebrow', { href: './' }, 'Written Messages'), h('h1', { tabIndex: -1 }, 'Moderate')),
       h('h2.eyebrow', { style: 'font-weight:400;margin-bottom:1rem' }, `Open reports · ${reports.data.length}`),
       reports.data.length === 0 && h('p.prose.notice', null, 'Nothing to review.'),
       reports.data.map((report) => h('article.report', null,
@@ -840,7 +839,7 @@
       renderBar();
       main.replaceChildren(h('div.enter', null, h('section.masthead', null,
         h('a.eyebrow', { href: '../' }, 'Lil Message'),
-        h('h1', null, 'Tabernacle'),
+        h('h1', null, 'Written Messages'),
         h('div.masthead-rule'),
         h('p', null, 'Opening soon.'),
       )));

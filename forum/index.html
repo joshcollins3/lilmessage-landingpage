@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tabernacle — Lil Message</title>
-  <meta name="description" content="Tabernacle, the Lil Message forum. Talk about the records and everything around them." />
+  <title>Written Messages — Lil Message</title>
+  <meta name="description" content="Written Messages, the Lil Message forum. Talk about the records and everything around them." />
   <!-- People may talk about leaving high-control groups here, so stay out of search results. -->
   <meta name="robots" content="noindex" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -83,6 +83,7 @@
       font-family: var(--display); font-weight: 700; font-size: 0.85rem;
       color: var(--gold); text-decoration: none; letter-spacing: 0.04em; white-space: nowrap;
     }
+    .bar-home + .bar-link { margin-left: -0.5rem; }
     .bar-links { display: flex; align-items: center; gap: 1.25rem; margin-left: auto; }
     .bar-link {
       font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
@@ -312,7 +313,8 @@
     @media (max-width: 600px) {
       .bar { gap: 0.75rem; }
       .bar-links { gap: 0.9rem; }
-      .bar-rules { display: none; }
+      .bar-rules, .bar-home { display: none; }
+      .bar-home + .bar-link { margin-left: 0; }
       .bar-me span { max-width: 6.5rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       .covers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .cover:last-child:nth-child(odd) { grid-column: span 2; aspect-ratio: 2 / 1; }
@@ -354,7 +356,7 @@
     <p class="footer-copy">© 2026 · Lil Message Studios · All Rights Reserved</p>
   </footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <noscript><p class="empty">Tabernacle needs JavaScript to run.</p></noscript>
+  <noscript><p class="empty">This forum needs JavaScript to run.</p></noscript>
 
   <script src="vendor/supabase.js"></script>
   <script src="config.js"></script>

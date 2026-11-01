@@ -1,4 +1,4 @@
-# Setting up Tabernacle, the forum
+# Setting up Written Messages, the forum
 
 Until `forum/config.js` is filled in, `lilmessage.org/forum/` shows "Opening soon", so it's safe to deploy the site before doing this.
 
