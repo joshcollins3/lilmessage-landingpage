@@ -234,7 +234,7 @@
       },
         h('label.field', null, h('span', null, 'Username'), input),
         preview,
-        h('label.check', null, agree, h('span', null, "I'm 13 or older and I agree to the ", h('a', { href: '?view=rules', target: '_blank', rel: 'noopener' }, 'rules and privacy notes'), '.')),
+        h('label.check', null, agree, h('span', null, "I'm 18 or older and I agree to the ", h('a', { href: '?view=rules', target: '_blank', rel: 'noopener' }, 'rules and privacy notes'), '.')),
         h('div.dialog-actions', null, button('btn-ghost', 'Not now', () => dialog.close()), save),
       ),
     );
@@ -696,7 +696,7 @@
           h('li', null, 'Respect what people tell you about their own lives. Their story is theirs.'),
           h('li', null, 'No recruiting, for a church, a group, a product or anything else. No spam.'),
           h('li', null, 'Nothing illegal, and nothing sexual involving minors, ever.'),
-          h('li', null, 'You must be 13 or older.'),
+          h('li', null, 'You must be 18 or older.'),
         ),
         h('p', { style: 'margin-top:1rem' }, 'Moderators can remove posts and ban accounts. Use Report on anything that breaks these rules.'),
         h('h2', null, 'Privacy'),
